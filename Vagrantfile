@@ -5,9 +5,11 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
+  #config.vm.box = "ubuntu/xenial64"
   config.vm.box = "ubuntu/trusty64"
 
-  memory_mb = 256
+
+  memory_mb = 512
 
   cluster = {
     'node-1' => "192.168.5.100",
@@ -18,7 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   cluster.each_with_index do |(short_name, ip), idx|
 
     config.vm.define short_name do |host|
-
+	
       host.vm.network :private_network, ip: ip
       host.vm.hostname = short_name
       host.vm.provider :virtualbox do |vb|

@@ -3,22 +3,16 @@
   become: yes
   vars:
     zk:
-      version: 3.4.8
+      version: 3.4.10
       mirror: http://www-us.apache.org/dist
       dataDir: /var/lib/zookeeper
       installDir: "/opt"
   tasks:
 
   # Install Oracle JVM
-  - name: Java | Ensure the Oracle JVM repository is present
-    apt_repository:
-      repo: ppa:webupd8team/java
-      state: present
-  - name: Java | Ensure the Oracle license is accepted
-    shell: echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
   - name: Java | Ensure Oracle Java 7 is installed
     apt:
-      name: oracle-java7-installer
+      name: openjdk-7-jdk
       state: latest
 
   # Download Zookeeper
